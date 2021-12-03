@@ -1,0 +1,1 @@
+#for p in *.pdf.new; do qpdf --stream-data=compress "$p" "${p%.new}"; done

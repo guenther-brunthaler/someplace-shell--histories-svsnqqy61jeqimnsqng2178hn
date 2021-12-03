@@ -1,0 +1,1 @@
+awk '{t= ($14 + $15) / 100; m= int(t / 60); printf "%d:%.2f\n", m, t - 60 * m}' /proc/${1:?"pid?"}/stat

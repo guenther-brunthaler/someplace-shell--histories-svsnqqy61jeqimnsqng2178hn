@@ -1,0 +1,1 @@
+# > f; ls x.part???.patch.part???.patch | while IFS= read -r p; do : echo "*** $p"; patch -si "$p" f; cksum < f | join - .bak.basic_arith_rpn_calc-path_history.cks > match; test -s match || continue; echo "$p $(<match)"; done > renames

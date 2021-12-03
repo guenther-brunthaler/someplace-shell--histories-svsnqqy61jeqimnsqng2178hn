@@ -1,0 +1,6 @@
+: open-repository; repo=repo-all.gz
+: select-workfile; w=workfile
+: diff; for f in "$repo" "$w"; do if test ! -f "$f"; then echo UNDEFINED; false; fi; done && LC_ALL=C TZ=UTC0 diff -Nau "$w".old "$w" | less -F
+: commit; for f in "$repo" "$w"; do if test ! -f "$f"; then echo UNDEFINED; false; fi; done && LC_ALL=C TZ=UTC0 diff -Nau "$w".old "$w" | gzip -9c >> "$repo" && cat < "$w" > "$w".old && echo DONE
+: co; for f in "$repo" "$w"; do if test ! -f "$f"; then echo UNDEFINED; false; fi; done && test ! -w "$w" && test ! -e "$w".old && chmod +w -- "$w" && cp -p -- "$w" "$w".old && echo DONE
+: ci; for f in "$repo" "$w"; do if test ! -f "$f"; then echo UNDEFINED; false; fi; done && test -w "$w" && test -w "$w".old && cmp -s -- "$w" "$w".old && rm -- "$w".old && chmod -w -- "$w" && echo DONE

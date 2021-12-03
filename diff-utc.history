@@ -1,0 +1,1 @@
+LC_ALL=C TZ=UTC0 diff -Nau /dev/null 
