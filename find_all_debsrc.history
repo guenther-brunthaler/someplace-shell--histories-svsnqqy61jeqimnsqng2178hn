@@ -1,0 +1,2 @@
+# List all *.dsc files found in tree as well as source/patches-archives referenced by it.
+find "$PWD" -name '*.dsc' | while IFS= read -r dsc; do echo "$dsc" && dir=`dirname -- "$dsc"` && sed '1,/^Files:/d; s/^ [^ ]* [^ ]* //; t; /^ /d;s/.*//;q' "$dsc" | sed '/^$/d' | sed 's/  */\n/' | while IFS= read -r src; do echo "$dir/$src"; done; done | while IFS= read -r f; do test -L "$f" && continue; test ! -e "$f" && continue; test ! -f && continue; echo "$f"; done # | /home/mnt/distfiles/maint/merge-move.sh
